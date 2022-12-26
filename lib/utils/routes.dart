@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:lootlo/screens/account/wallet_screen.dart';
 import 'package:lootlo/screens/home_screen.dart';
 import 'package:lootlo/screens/login_screen.dart';
 import 'package:lootlo/screens/sign_up_screen.dart';
@@ -9,6 +10,7 @@ class AppRoutes {
       LoginScreen.routeName: (_) => const LoginScreen(),
       SignUpScreen.routeName: (_) => const SignUpScreen(),
       HomeScreen.routeName: (_) => const HomeScreen(),
+      WalletScreen.routeName: (_) => const WalletScreen(),
     };
   }
 }

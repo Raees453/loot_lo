@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppConstants.appBackgroundColor,
-      appBar: CustomAppBar.getAppBar(appBarTitle),
+      appBar: CustomAppBar.getAppBar(context, appBarTitle),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         type: BottomNavigationBarType.fixed,
