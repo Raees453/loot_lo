@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lootlo/screens/login_screen.dart';
+import 'package:lootlo/screens/auth/login_screen.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

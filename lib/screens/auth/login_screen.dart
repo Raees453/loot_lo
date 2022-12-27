@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lootlo/screens/auth/sign_up_screen.dart';
 import 'package:lootlo/screens/home_screen.dart';
-import 'package:lootlo/screens/sign_up_screen.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_button.dart';
 import 'package:lootlo/widgets/custom_components/custom_text_field.dart';

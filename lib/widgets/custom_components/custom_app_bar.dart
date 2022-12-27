@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lootlo/screens/account/wallet_screen.dart';
-import 'package:lootlo/screens/custom_back_button.dart';
 
+import '../../screens/custom_back_button.dart';
 import '../../utils/constants/app_constants.dart';
 
 class CustomAppBar {
@@ -13,25 +13,23 @@ class CustomAppBar {
     return AppBar(
       elevation: 0,
       centerTitle: true,
+      title: Text(title),
       backgroundColor: Colors.transparent,
       titleTextStyle: const TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       ),
-      title: Text(title),
-      leading: Padding(
-        padding: const EdgeInsets.only(left: AppConstants.fullScreenPadding),
-        child: showLeading
-            ? const CustomBackButton()
-            : IconButton(
-                icon: const Icon(
-                  Icons.blur_circular_sharp,
-                  color: Colors.black,
-                ),
-                onPressed: () {},
-              ),
+      iconTheme: const IconThemeData(
+        color: Colors.black,
       ),
+      automaticallyImplyLeading: true,
+      leading: showLeading
+          ? const Padding(
+              padding: EdgeInsets.only(left: AppConstants.fullScreenPadding),
+              child: CustomBackButton(),
+            )
+          : null,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: AppConstants.fullScreenPadding),
@@ -40,7 +38,6 @@ class CustomAppBar {
                 Navigator.of(context).pushNamed(WalletScreen.routeName),
             icon: const Icon(
               Icons.wallet,
-              color: Colors.black,
             ),
           ),
         ),

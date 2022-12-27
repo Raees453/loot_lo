@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lootlo/screens/login_screen.dart';
+import 'package:lootlo/screens/auth/login_screen.dart';
 
-import '../utils/constants/app_constants.dart';
-import '../widgets/custom_components/custom_button.dart';
-import '../widgets/custom_components/custom_text_field.dart';
+import '../../utils/constants/app_constants.dart';
+import '../../widgets/custom_components/custom_button.dart';
+import '../../widgets/custom_components/custom_text_field.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const String routeName = '/sign-up';

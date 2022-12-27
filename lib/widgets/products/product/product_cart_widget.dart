@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lootlo/models/product.dart';
 
 import '../../../models/cart.dart';
+import '../../../screens/product/product_details_screen.dart';
 import '../../../utils/constants/app_constants.dart';
 
 class ProductCartWidget extends StatefulWidget {
@@ -21,6 +22,8 @@ class _ProductCartWidgetState extends State<ProductCartWidget> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => Navigator.of(context)
+          .pushNamed(ProductDetailsScreen.routeName, arguments: widget.product),
       minVerticalPadding: 10,
       contentPadding: EdgeInsets.zero,
       title: Text(

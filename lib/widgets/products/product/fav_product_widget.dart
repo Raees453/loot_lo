@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lootlo/screens/product/product_details_screen.dart';
 
 import '../../../models/product.dart';
 import '../../../utils/constants/app_constants.dart';
@@ -15,29 +16,33 @@ class FavProductWidget extends StatefulWidget {
 class _FavProductWidgetState extends State<FavProductWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Stack(
-        children: [
-          _ProductView(product: widget.product),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                widget.product.toggleFavourite();
-              });
-            },
-            icon: Icon(
-              widget.product.isFavourite
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color: Theme.of(context).primaryColor,
+    return GestureDetector(
+      onTap: () => Navigator.of(context)
+          .pushNamed(ProductDetailsScreen.routeName, arguments: widget.product),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Stack(
+          children: [
+            _ProductView(product: widget.product),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  widget.product.toggleFavourite();
+                });
+              },
+              icon: Icon(
+                widget.product.isFavourite
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

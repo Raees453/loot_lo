@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lootlo/screens/account_screen.dart';
-import 'package:lootlo/screens/cart_screen.dart';
 import 'package:lootlo/screens/fav_products_screen.dart';
+import 'package:lootlo/screens/orders/cart_screen.dart';
 import 'package:lootlo/screens/products_screen.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_app_bar.dart';
+import 'package:lootlo/widgets/custom_components/custom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -39,23 +40,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int currentIndex = 0;
   String appBarTitle = 'Home';
+  bool _isFirstRebuild = true;
 
   @override
   Widget build(BuildContext context) {
+    int? startIndex = ModalRoute.of(context)?.settings.arguments as int?;
+    if (startIndex != null && _isFirstRebuild) {
+      currentIndex = startIndex;
+      appBarTitle = _titles[startIndex];
+      _isFirstRebuild = false;
+    }
+
     return Scaffold(
       backgroundColor: AppConstants.appBackgroundColor,
       appBar: CustomAppBar.getAppBar(context, appBarTitle),
+      drawer: const CustomDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
         currentIndex: currentIndex,
-        onTap: (int index) {
-          setState(() {
-            currentIndex = index;
-            appBarTitle = _titles[index];
-          });
-        },
+        onTap: (int index) => setState(() {
+          currentIndex = index;
+          appBarTitle = _titles[index];
+        }),
         items: items.entries
             .map(
               (e) => BottomNavigationBarItem(
