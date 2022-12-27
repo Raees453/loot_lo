@@ -17,4 +17,9 @@ class Product {
   void toggleFavourite() {
     isFavourite = !isFavourite;
   }
+
+  @override
+  String toString() {
+    return 'Product{title: $title, description: $description, price: $price, imagePaths: $imagePaths, imagePath: $imagePath, isFavourite: $isFavourite}';
+  }
 }

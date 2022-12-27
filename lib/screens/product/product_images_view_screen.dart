@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lootlo/models/product.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
-import 'package:lootlo/widgets/custom_components/custom_netwrok_image.dart';
+import 'package:lootlo/widgets/custom_components/custom_network_image.dart';
 
 class ProductImagesViewScreen extends StatefulWidget {
   static const String routeName = '/product-images-view';
@@ -98,43 +98,56 @@ class _ProductImagesViewScreenState extends State<ProductImagesViewScreen>
   Widget buildBottomSheet(List<String> imagePaths) {
     int index = -1;
     return Container(
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        border: null,
+      ),
       padding: const EdgeInsets.only(
         left: AppConstants.horizontalPadding,
+        right: AppConstants.horizontalPadding,
         bottom: AppConstants.horizontalPadding * 2,
       ),
-      color: Colors.black,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           children: imagePaths.map((e) {
             index++;
-            return buildImageWidget(e, selectedIndex == index);
+            return buildMiniProductImageWidget(e, index);
           }).toList(),
         ),
       ),
     );
   }
 
-  Widget buildImageWidget(String imagePath, bool isSelected) {
-    return Container(
-      margin: const EdgeInsets.only(
-        right: AppConstants.productMiniImageHeightWidth * 0.3,
+  Widget buildMiniProductImageWidget(String imagePath, int indexNum) {
+    return GestureDetector(
+      onTap: () => controller.animateToPage(
+        indexNum,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
       ),
-      constraints: const BoxConstraints(
-        minHeight: AppConstants.productMiniImageHeightWidth,
-        maxHeight: AppConstants.productMiniImageHeightWidth,
-        minWidth: AppConstants.productMiniImageHeightWidth,
-        maxWidth: AppConstants.productMiniImageHeightWidth,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 3,
-          color: isSelected ? Theme.of(context).primaryColor : Colors.white,
+      child: Container(
+        margin: const EdgeInsets.only(
+          right: AppConstants.productMiniImageHeightWidth * 0.3,
         ),
-      ),
-      child: CustomNetworkImage(
-        imagePath: imagePath,
-        height: AppConstants.productImageHeight,
+        constraints: const BoxConstraints(
+          minHeight: AppConstants.productMiniImageHeightWidth,
+          maxHeight: AppConstants.productMiniImageHeightWidth,
+          minWidth: AppConstants.productMiniImageHeightWidth,
+          maxWidth: AppConstants.productMiniImageHeightWidth,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 3,
+            color: indexNum == selectedIndex
+                ? Theme.of(context).primaryColor
+                : Colors.white,
+          ),
+        ),
+        child: CustomNetworkImage(
+          imagePath: imagePath,
+          height: AppConstants.productImageHeight,
+        ),
       ),
     );
   }

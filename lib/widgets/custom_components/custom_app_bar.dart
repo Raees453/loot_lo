@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lootlo/screens/account/wallet_screen.dart';
 
-import '../../screens/custom_back_button.dart';
 import '../../utils/constants/app_constants.dart';
+import 'custom_back_button.dart';
 
 class CustomAppBar {
   static AppBar getAppBar(

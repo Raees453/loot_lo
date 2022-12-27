@@ -139,7 +139,7 @@ class PageViewScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 subtitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.grey,
                 ),

@@ -1,6 +1,6 @@
 import 'package:lootlo/models/product.dart';
 
-final allProducts = [
+final List<Product> allProducts = [
   Product(
     title: 'Fibre Shirts',
     imagePath:

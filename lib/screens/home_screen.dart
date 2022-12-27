@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lootlo/screens/account_screen.dart';
-import 'package:lootlo/screens/fav_products_screen.dart';
+import 'package:lootlo/screens/account/account_screen.dart';
 import 'package:lootlo/screens/orders/cart_screen.dart';
-import 'package:lootlo/screens/products_screen.dart';
+import 'package:lootlo/screens/product/fav_products_screen.dart';
+import 'package:lootlo/screens/product/products_screen.dart';
+import 'package:lootlo/services/product_search_delegate.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_app_bar.dart';
 import 'package:lootlo/widgets/custom_components/custom_drawer.dart';
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('Home Screen Build!!!!');
     int? startIndex = ModalRoute.of(context)?.settings.arguments as int?;
     if (startIndex != null && _isFirstRebuild) {
       currentIndex = startIndex;
@@ -84,26 +86,33 @@ class SearchButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(40),
+    return GestureDetector(
+      onTap: () => showSearch(
+        // query: '',
+        context: context,
+        delegate: ProductSearchDelegate(),
       ),
-      padding: const EdgeInsets.all(AppConstants.horizontalPadding),
-      child: Row(
-        children: const [
-          Icon(
-            Icons.search,
-            size: 30,
-          ),
-          SizedBox(width: 20),
-          Text(
-            'Looking for...',
-            style: TextStyle(
-              fontSize: 20,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(40),
+        ),
+        padding: const EdgeInsets.all(AppConstants.horizontalPadding),
+        child: Row(
+          children: const [
+            Icon(
+              Icons.search,
+              size: 30,
             ),
-          ),
-        ],
+            SizedBox(width: 20),
+            Text(
+              'Looking for...',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
