@@ -64,21 +64,28 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildBottomAppBar() {
-    return SizedBox(
-      height: 60,
-      child: CustomPaint(
-        willChange: false,
-        painter: RPSCustomPainter(context),
-        child: Row(
-          children: [
-            buildAppBarIcon(Icons.home, 0, 'Home'),
-            buildAppBarIcon(Icons.favorite_border, 1, 'Favourites'),
-            const Spacer(),
-            buildAppBarIcon(
-                Icons.notifications_none_outlined, 2, 'Notifications'),
-            buildAppBarIcon(Icons.person_outline_outlined, 3, 'Account'),
-          ],
-        ),
+    return Container(
+      color: Colors.white,
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          SizedBox(
+            height: 60,
+            child: CustomPaint(
+              painter: RPSCustomPainter(),
+            ),
+          ),
+          Row(
+            children: [
+              buildAppBarIcon(Icons.home, 0, 'Home'),
+              buildAppBarIcon(Icons.favorite_border, 1, 'Favourites'),
+              const Spacer(),
+              buildAppBarIcon(
+                  Icons.notifications_none_outlined, 2, 'Notifications'),
+              buildAppBarIcon(Icons.person_outline_outlined, 3, 'Account'),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -104,14 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class RPSCustomPainter extends CustomPainter {
-  final BuildContext context;
-
-  RPSCustomPainter(this.context);
-
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = Colors.white
+      ..color = Colors.grey.shade100
       ..strokeWidth = 150;
 
     Path path0 = Path();

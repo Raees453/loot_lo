@@ -7,6 +7,9 @@ import 'package:lootlo/screens/orders/orders_screen.dart';
 import 'package:lootlo/screens/product/product_details_screen.dart';
 import 'package:lootlo/screens/product/product_images_view_screen.dart';
 
+import '../screens/account/settings/address_book_screen.dart';
+import '../screens/account/settings/notification_settings.dart';
+import '../screens/account/settings/payment_options_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
 
 class AppRoutes {
@@ -20,6 +23,10 @@ class AppRoutes {
       ProductImagesViewScreen.routeName: (_) => const ProductImagesViewScreen(),
       ProfileScreen.routeName: (_) => const ProfileScreen(),
       OrdersScreen.routeName: (_) => const OrdersScreen(),
+      PaymentOptionsScreen.routeName: (_) => PaymentOptionsScreen(),
+      AddressBookScreen.routeName: (_) => AddressBookScreen(),
+      NotificationSettingsScreen.routeName: (_) =>
+          const NotificationSettingsScreen(),
     };
   }
 }
