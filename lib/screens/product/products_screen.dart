@@ -6,7 +6,7 @@ import '../../widgets/products/products_list_widget.dart';
 import '../home_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+  ProductsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -23,10 +23,11 @@ class _HomeCarouselWidgetState extends State<HomeCarouselWidget> {
   ];
 
   int _currentPage = 0;
+  late final Timer timer;
 
   @override
   void initState() {
-    Timer.periodic(
+    timer = Timer.periodic(
       const Duration(seconds: AppConstants.bannerAnimationDelaySeconds),
       (timer) {
         if (_currentPage < imagePaths.length - 1) {
@@ -34,7 +35,6 @@ class _HomeCarouselWidgetState extends State<HomeCarouselWidget> {
         } else {
           _currentPage = 0;
         }
-
         pageController.animateToPage(
           _currentPage,
           duration: const Duration(milliseconds: 500),
@@ -88,5 +88,11 @@ class _HomeCarouselWidgetState extends State<HomeCarouselWidget> {
         width: double.infinity,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 }

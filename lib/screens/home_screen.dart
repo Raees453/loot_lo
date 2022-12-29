@@ -3,10 +3,11 @@ import 'package:lootlo/screens/account/account_screen.dart';
 import 'package:lootlo/screens/orders/cart_screen.dart';
 import 'package:lootlo/screens/product/fav_products_screen.dart';
 import 'package:lootlo/screens/product/products_screen.dart';
-import 'package:lootlo/services/product_search_delegate.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_app_bar.dart';
 import 'package:lootlo/widgets/custom_components/custom_drawer.dart';
+
+import '../services/product_search_delegate.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -25,18 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
     'Account': Icons.account_circle,
   };
 
-  final _titles = [
-    'Home',
-    'Favourites',
-    'Cart',
-    'Account',
-  ];
+  final _titles = ['Home', 'Favourites', 'Cart', 'Account'];
 
   final screens = [
-    const ProductsScreen(),
+    ProductsScreen(),
     FavProductsScreen(),
     CartScreen(),
-    const AccountScreen(),
+    const AccountScreen()
   ];
 
   int currentIndex = 0;
@@ -45,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Home Screen Build!!!!');
     int? startIndex = ModalRoute.of(context)?.settings.arguments as int?;
     if (startIndex != null && _isFirstRebuild) {
       currentIndex = startIndex;
@@ -57,27 +52,101 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppConstants.appBackgroundColor,
       appBar: CustomAppBar.getAppBar(context, appBarTitle),
       drawer: const CustomDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.transparent,
-        currentIndex: currentIndex,
-        onTap: (int index) => setState(() {
-          currentIndex = index;
-          appBarTitle = _titles[index];
-        }),
-        items: items.entries
-            .map(
-              (e) => BottomNavigationBarItem(
-                icon: Icon(e.value),
-                label: '',
-                tooltip: e.key,
-              ),
-            )
-            .toList(),
+      bottomNavigationBar: buildBottomAppBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.shopping_cart),
+        onPressed: () {},
       ),
+      // body:
       body: screens.elementAt(currentIndex),
     );
+  }
+
+  Widget buildBottomAppBar() {
+    return SizedBox(
+      height: 60,
+      child: CustomPaint(
+        willChange: false,
+        painter: RPSCustomPainter(context),
+        child: Row(
+          children: [
+            buildAppBarIcon(Icons.home, 0, 'Home'),
+            buildAppBarIcon(Icons.favorite_border, 1, 'Favourites'),
+            const Spacer(),
+            buildAppBarIcon(
+                Icons.notifications_none_outlined, 2, 'Notifications'),
+            buildAppBarIcon(Icons.person_outline_outlined, 3, 'Account'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildAppBarIcon(IconData icon, int indexNum, String appBarTitle) {
+    return Expanded(
+      child: IconButton(
+        onPressed: () {
+          if (currentIndex != indexNum) {
+            this.appBarTitle = appBarTitle;
+            setState(() => currentIndex = indexNum);
+          }
+        },
+        icon: Icon(
+          icon,
+          color: currentIndex == indexNum
+              ? Theme.of(context).primaryColor
+              : Colors.grey,
+        ),
+      ),
+    );
+  }
+}
+
+class RPSCustomPainter extends CustomPainter {
+  final BuildContext context;
+
+  RPSCustomPainter(this.context);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint0 = Paint()
+      ..color = Colors.white
+      ..strokeWidth = 150;
+
+    Path path0 = Path();
+    path0.moveTo(0, -size.height * 0.3);
+
+    path0.quadraticBezierTo(
+      size.width * 0.05,
+      0,
+      size.width * 0.4,
+      size.height * 0.1,
+    );
+
+    path0.arcToPoint(
+      Offset(size.width * 0.6, size.height * 0.1),
+      radius: const Radius.circular(5),
+      clockwise: false,
+    );
+
+    path0.quadraticBezierTo(
+      size.width * 0.9,
+      size.height * 0.1,
+      size.width,
+      -size.height * 0.3,
+    );
+
+    path0.lineTo(size.width, size.height);
+    path0.lineTo(0, size.height);
+    path0.close();
+
+    canvas.drawPath(path0, paint0);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }
 
