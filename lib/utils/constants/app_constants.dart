@@ -20,4 +20,8 @@ class AppConstants {
   static const double doubleTapZoomScale = 4;
 
   static const double productMiniImageHeightWidth = 60;
+
+  static const double dividerThickness = 1.5;
+
+  static String? addressStreet;
 }

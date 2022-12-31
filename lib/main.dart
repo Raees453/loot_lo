@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lootlo/screens/home_screen.dart';
+import 'package:lootlo/services/location_service.dart';
 import 'package:lootlo/utils/routes.dart';
 
 // TODO Research for Address Options
@@ -7,7 +8,9 @@ import 'package:lootlo/utils/routes.dart';
 // TODO Apply Filter View to search screen
 // TODO Build Profile Screen as well
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final position = await LocationService.getCurrentLocation();
   runApp(const MyApp());
 }
 

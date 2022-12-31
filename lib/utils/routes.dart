@@ -11,6 +11,7 @@ import '../screens/account/settings/address_book_screen.dart';
 import '../screens/account/settings/notification_settings.dart';
 import '../screens/account/settings/payment_options_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
+import '../screens/orders/checout_screen.dart';
 
 class AppRoutes {
   static Map<String, Widget Function(BuildContext)> getRoutes() {
@@ -25,6 +26,7 @@ class AppRoutes {
       OrdersScreen.routeName: (_) => const OrdersScreen(),
       PaymentOptionsScreen.routeName: (_) => PaymentOptionsScreen(),
       AddressBookScreen.routeName: (_) => AddressBookScreen(),
+      CheckoutScreen.routeName: (_) => CheckoutScreen(),
       NotificationSettingsScreen.routeName: (_) =>
           const NotificationSettingsScreen(),
     };

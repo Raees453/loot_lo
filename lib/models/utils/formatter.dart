@@ -4,7 +4,7 @@ class Formatter {
   static String getFormattedPrice(int price, {bool addPkr = true}) {
     var formatter = NumberFormat("#,##,###", "en_US");
     final text = formatter.format(price);
-    if (addPkr) return 'PKR $price';
+    if (addPkr) return 'PKR $text';
 
     return text;
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lootlo/screens/account/account_screen.dart';
 import 'package:lootlo/screens/orders/cart_screen.dart';
 import 'package:lootlo/screens/product/fav_products_screen.dart';
+import 'package:lootlo/screens/product/product_notifications_screen.dart';
 import 'package:lootlo/screens/product/products_screen.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_app_bar.dart';
@@ -31,8 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final screens = [
     ProductsScreen(),
     FavProductsScreen(),
+    ProductNotificationsScreen(),
+    const AccountScreen(),
     CartScreen(),
-    const AccountScreen()
   ];
 
   int currentIndex = 0;
@@ -55,10 +57,20 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: buildBottomAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.shopping_cart),
-        onPressed: () {},
+        backgroundColor:
+            currentIndex == 4 ? Colors.white : Theme.of(context).primaryColor,
+        child: Icon(
+          Icons.shopping_cart,
+          color:
+              currentIndex != 4 ? Colors.white : Theme.of(context).primaryColor,
+        ),
+        onPressed: () {
+          if (currentIndex != 4) {
+            appBarTitle = 'Cart';
+            setState(() => currentIndex = 4);
+          }
+        },
       ),
-      // body:
       body: screens.elementAt(currentIndex),
     );
   }

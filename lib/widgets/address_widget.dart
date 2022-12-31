@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lootlo/widgets/utility_widgets.dart';
 
 class AddressWidget extends StatelessWidget {
-  const AddressWidget({Key? key}) : super(key: key);
+  const AddressWidget({Key? key, this.message}) : super(key: key);
+  final String? message;
+
+  final String name = 'Ali Wajdan';
 
   @override
   Widget build(BuildContext context) {
@@ -10,16 +14,18 @@ class AddressWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: const EdgeInsets.all(12.0),
+      padding: message == null
+          ? const EdgeInsets.all(12.0)
+          : const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Ali Wajdan',
-                style: TextStyle(
+              Text(
+                message == null ? name : message! + name,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                 ),
@@ -27,7 +33,7 @@ class AddressWidget extends StatelessWidget {
               TextButton(onPressed: () {}, child: const Text('Edit')),
             ],
           ),
-          buildCategoryBox(context, 'Home'),
+          UtilityWidgets.buildTagBoxWidget('Home'),
           const SizedBox(height: 10),
           const Text(
             'Khalid Bin Waleed Hall, Anarkali Bazar Old Campus Punjab University, Lahore',
@@ -41,22 +47,6 @@ class AddressWidget extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  Widget buildCategoryBox(BuildContext context, String title) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Theme.of(context).primaryColor),
-      ),
-      child: Text(
-        title,
-        style: TextStyle(
-          color: Theme.of(context).primaryColor,
-        ),
       ),
     );
   }

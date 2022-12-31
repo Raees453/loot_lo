@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lootlo/hard_coded.dart';
 import 'package:lootlo/models/cart.dart';
+import 'package:lootlo/screens/orders/checout_screen.dart';
 import 'package:lootlo/utils/constants/app_constants.dart';
 import 'package:lootlo/widgets/custom_components/custom_button.dart';
 import 'package:lootlo/widgets/products/product/product_cart_widget.dart';
@@ -43,7 +44,12 @@ class CartScreen extends StatelessWidget {
           const Spacer(),
           const Divider(thickness: 2),
           buildTotalTextWidget(),
-          CustomButton(text: 'Checkout', onPressed: () {}),
+          CustomButton(
+            text: 'Checkout',
+            onPressed: () => Navigator.of(context).pushNamed(
+              CheckoutScreen.routeName,
+            ),
+          ),
         ],
       ),
     );

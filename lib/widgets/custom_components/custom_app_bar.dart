@@ -13,7 +13,20 @@ class CustomAppBar {
     return AppBar(
       elevation: 0,
       centerTitle: true,
-      title: Text(title),
+      title: Column(
+        children: [
+          Text(title),
+          if (AppConstants.addressStreet != null) const SizedBox(height: 5),
+          if (AppConstants.addressStreet != null)
+            Text(
+              AppConstants.addressStreet!,
+              style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.normal,
+              ),
+            )
+        ],
+      ),
       backgroundColor: Colors.transparent,
       titleTextStyle: const TextStyle(
         color: Colors.black,
